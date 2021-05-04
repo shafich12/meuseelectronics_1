@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-item lines="none">
+    <ion-searchbar animated placeholder="Search Products" (ionChange)="onSearchChange($event)" [debounce]="400" showCancelButton="always"></ion-searchbar>
+  </ion-item>
+  <ion-item lines="none">
+    <h1 class="ion-no-padding ion-no-margin">Results</h1>
+  </ion-item>
+
+  <ion-list *ngIf="filtered.length > 0">
+    <ng-container *ngFor="let product of filtered">
+      <ion-card class="product" [routerLink]="['/product', product.id]">
+        <ion-card-content class="ion-text-center">
+          <img [src]="product.images[0].src">
+          <div class="ion-text-center">
+            <h2>{{product.name}}</h2>
+            <p>${{product.price}}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ion-list>
+
+  <ion-list *ngIf="showSkeleton">
+    <ng-container *ngFor="let product of [].constructor(3)">
+      <ion-card class="product" [routerLink]="['/product', product.id]">
+        <ion-card-content class="ion-text-center">
+          <ion-thumbnail>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <div class="ion-text-center">
+            <h2><ion-skeleton-text animated></ion-skeleton-text></h2>
+            <p><ion-skeleton-text animated></ion-skeleton-text></p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ion-list>
+  
+  <ion-list *ngIf="filtered.length <= 0 && touched">
+    <ng-container>
+      <ion-label>
+        No product found
+      </ion-label>
+    </ng-container>
+  </ion-list>
+
+
+</ion-content>

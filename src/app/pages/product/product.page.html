@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border ion-padding" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1" mode="md"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-slides class="gallery" Sclass="ion-padding-top" pager="true">
+    <ion-slide class="ion-margin-bottom" *ngFor="let image of product.images">
+      <img [src]="image.src">
+    </ion-slide>
+  </ion-slides>
+
+  <div class="ion-padding">
+
+    <div class="title">
+      <img [src]="product.logo">
+      <h1>{{product.name}}</h1>
+      <h2>${{product.price}}</h2>
+    </div>
+
+    <!-- <ion-item lines="none">
+      <p><strong>Size</strong></p>
+    </ion-item>
+
+    <ion-slides pager="false" [options]="slideOpts">
+      <ng-container *ngFor="let size of sizes">
+        <ion-slide class="size-slide ion-margin-bottom" [ngStyle]="{'background' : size.selected === true ? 'var(--ion-color-dark)' : 'var(--ion-color-medium)',
+        'color' : size.selected === true ? 'white' : 'var(--ion-color-dark)' }">
+          {{size.number}}
+        </ion-slide>
+      </ng-container>
+    </ion-slides> -->
+
+    <ion-item lines="none">
+      <p><strong>Description</strong></p>
+    </ion-item>
+    <ion-item lines="none" class="description">
+      <div [innerHTML]="product.description"></div>
+        
+    </ion-item>
+
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="3">
+      </ion-col>
+      <ion-col size="9">
+        <ion-button fill="solid" size="large" color="dark" shape="round" expand="block" [routerLink]="['/checkout', product.id]">Buy Now</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
