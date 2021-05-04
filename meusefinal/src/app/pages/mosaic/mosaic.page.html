@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <h1 class="ion-no-padding ion-no-margin">{{catTitle}}</h1>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row class="ion-no-padding ion-no-margin">
+      <ng-container *ngFor="let product of products">
+        <ion-col class="ion-no-padding ion-no-margin" size="6">
+          <ion-card class="product" [routerLink]="['/product', product.id]">
+            <ion-card-content>
+              <h2>{{product.name}}</h2>
+              <img [src]="product.images[0].src">
+              <ion-item style="--background: none;" class="ion-no-padding ion-no-margin" lines="none">
+                <ion-button mode="ios" slot="start" shape="round" size="small" color="dark">Buy</ion-button>
+                <p>${{product.price}}</p>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+
+
+
+</ion-content>

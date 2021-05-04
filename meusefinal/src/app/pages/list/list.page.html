@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border ion-padding" mode="md">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  class="ion-padding">
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <h1 class="ion-no-padding ion-no-margin">All Categories</h1>
+    <ion-button fill="clear" slot="end" color="dark" mode="ios">
+      <!-- <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+      <strong>Sort by</strong> -->
+    </ion-button>
+  </ion-item>
+
+  <ng-container *ngFor="let category of categories">
+    <ion-item class="product ion-margin-bottom" [routerLink]="['/mosaic', category.id]" lines="none" detail="false">
+      <ion-thumbnail slot="start">
+        <img [src]="category.image.src">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{category.name}}</h2>
+      </ion-label>
+    </ion-item>
+  </ng-container>
+
+</ion-content>

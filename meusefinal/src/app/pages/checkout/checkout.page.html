@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border ion-padding" translucent="true" mode="md">
+  <ion-toolbar mode="md">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-item lines="none" class="ion-margin-bottom">
+    <h1 class="ion-no-padding ion-no-margin">Checkout</h1>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-thumbnail slot="start" *ngFor="let image of product.images">
+      <img [src]="image.src">
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{product.name}}</h2>
+     <p>${{product.price}}</p>
+    </ion-label>
+  </ion-item>
+
+
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="email" type="text"></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-item class="ion-margin-bottom ion-padding-bottom ion-no-margin ion-no-padding" lines="none" detail="false">
+    <ion-label>
+      <h2 id="total">Total</h2>
+    </ion-label>
+    <ion-label class="ion-text-right ion-no-margin" slot="end">
+      <h2 id="price">${{ total }}</h2>
+    </ion-label>
+  </ion-item>
+
+  <angular4-paystack
+    [email]="checkoutForm.get('email').value"
+    [currency]="'GHS'"
+    [amount]="total * 100"
+    [ref]="reference"
+    [channels]="['card', 'mobile_money']"
+    [class]="'btn btn-primary'"
+    (close)="paymentCancel()"
+    (callback)="paymentDone($event)"
+  >
+  <ion-button fill="solid" size="large" color="dark" shape="round" expand="block">Pay Now</ion-button>
+  </angular4-paystack>
+
+</ion-footer>
